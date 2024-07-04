@@ -1,0 +1,4 @@
+Flask
+clickhouse-connect
+pandas
+requests
