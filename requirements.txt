@@ -1,4 +1,10 @@
 Flask
+flask-bcrypt
+Flask-JWT-Extended
 clickhouse-connect
 pandas
 requests
+python-dotenv==0.20.0
+bcrypt==3.2.0
+clickhouse-driver
+python-dateutil
