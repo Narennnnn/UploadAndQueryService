@@ -152,7 +152,38 @@ If you receive a response with the following message:
       "message": "Token has expired!"
   }
 ```
+
 **Action**
 Re-login:
 Obtain a new JWT token by logging in again using your credentials.
     
+## Cost Estimation for Running EC2 Instance in Production
+
+### Instance Details:
+- **Instance Type:** t3.micro instance is in the general purpose family with 2 vCPUs, 1.0 GiB of memory and up to 5 Gibps of bandwidth starting at $0.0108 per hour.
+- **Region:** Europe (Stockholm) (eu-north-1)
+- **On-Demand Linux Pricing:** $0.0108 USD per Hour
+
+### Operations:
+- **Instance Running Time:** 24 hours/day
+- **Number of Days:** 30 days
+- **File Uploads:** 1 per day
+- **Queries:** 100 per day
+
+### Cost Calculation:
+
+1. **Calculate Monthly Hours:**
+   - Hours in a day: 24 hours
+   - Days in a month: 30 days
+   - Total hours per month: 720 hours
+
+2. **Calculate Instance Cost:**
+   - Hourly rate: $0.0108 USD
+   - Monthly cost: 720 hours * $0.0108 USD/hour = $7.78 USD/month
+
+### Total Estimated Cost:
+- **Base EC2 Cost:** $7.78 USD/month
+
+### Free Tier Eligibility:
+- The t3.micro instance type is eligible for the AWS Free Tier for new AWS accounts. 
+- Under the Free Tier, you can use 750 hours of t3.micro instance per month for the first 12 months after sign-up
