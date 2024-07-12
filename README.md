@@ -2,6 +2,9 @@
 
 This repository contains a Flask application for handling CSV upload, querying data from ClickHouse, and authentication using JWT.
 
+
+### Note: Temporarily stopped EC2 instance
+
 ## Setup
 
 ### Docker Setup
