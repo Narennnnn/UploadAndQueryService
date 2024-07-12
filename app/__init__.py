@@ -3,7 +3,7 @@ from .config import Config
 from .auth import auth_bp
 from .query import query_bp
 from .upload import main_bp
-from .validusers import init_db
+from .usersSchema import init_db
 
 def create_app():
     app = Flask(__name__)

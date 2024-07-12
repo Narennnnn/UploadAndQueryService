@@ -31,6 +31,3 @@ def insert_user(username, password):
         f"INSERT INTO users (id, username, password) VALUES ('{user_id}', '{username}', '{hashed_password.decode('utf-8')}')"
     )
 
-def add_sample_users():
-    insert_user("narendrr", "script#Testing123.")
-    insert_user("shobhit", "shobhit@segwise")
