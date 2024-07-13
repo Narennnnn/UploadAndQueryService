@@ -9,19 +9,21 @@ from flask import Blueprint, jsonify, request
 from app import Config
 from app.utils import token_required
 
-# logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
 main_bp = Blueprint('main', __name__)
 client = Client(
     host=Config.CLICKHOUSE_HOST,
     user=Config.CLICKHOUSE_USER,
     password=Config.CLICKHOUSE_PASSWORD,
     secure=True,
-    verify=False
+    verify=False,
+    settings={
+        'async_insert': 1,
+        'wait_for_async_insert': 1
+    }
 )
 
 create_table_query = """
-CREATE TABLE IF NOT EXISTS segwise_game_data_table (
+CREATE TABLE IF NOT EXISTS segwise_game_data_table_dummy (
     s_no Int32,
     AppID Int32,
     Name String,
@@ -45,7 +47,12 @@ CREATE TABLE IF NOT EXISTS segwise_game_data_table (
 ORDER BY AppID;
 """
 
-client.execute(create_table_query)
+def create_table():
+    try:
+        client.execute(create_table_query)
+        print("Table created or verified successfully.")
+    except Exception as e:
+        print(f"Failed to create or verify the table: {str(e)}")
 
 def parse_date(date_str):
     try:
@@ -98,11 +105,18 @@ def upload_csv_to_clickhouse(csv_file_path):
                     'Tags': row['Tags']
                 })
 
-            # Batch insert rows
-            client.execute(
-                'INSERT INTO segwise_game_data_table VALUES',
-                rows
-            )
+                if len(rows) >= 1000:
+                    client.execute(
+                        'INSERT INTO segwise_game_data_table_dummy VALUES',
+                        rows
+                    )
+                    rows = []
+
+            if rows:
+                client.execute(
+                    'INSERT INTO segwise_game_data_table_dummy VALUES',
+                    rows
+                )
 
         print("Data loaded successfully")
     except Exception as e:
@@ -123,6 +137,7 @@ def handle_upload_csv():
         csv_url = data.get('csv_url')
         csv_file_path = download_csv_from_url(csv_url)
         if csv_file_path:
+            create_table()  # Ensure the table is created or exists before uploading data
             upload_csv_to_clickhouse(csv_file_path)
             delete_local_csv(csv_file_path)
             return jsonify({'message': 'CSV upload and processing completed.'}), 200

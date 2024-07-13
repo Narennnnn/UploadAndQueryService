@@ -29,12 +29,12 @@ def build_query(filters, aggregates, aggregate_conditions):
         else:
             where_clauses.append(f"{field} LIKE '%{value}%'")
 
-    query = "SELECT * FROM segwise_game_data_table"
+    query = "SELECT * FROM segwise_game_data_table_dummy"
     if where_clauses:
         query += " WHERE " + " AND ".join(where_clauses)
     if aggregates:
         aggregate_select = ", ".join(aggregates)
-        query = f"SELECT {aggregate_select} FROM segwise_game_data_table"
+        query = f"SELECT {aggregate_select} FROM segwise_game_data_table_dummy"
         if where_clauses:
             query += " WHERE " + " AND ".join(where_clauses)
         if aggregate_conditions:
