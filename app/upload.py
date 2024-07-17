@@ -137,7 +137,7 @@ def handle_upload_csv():
         csv_url = data.get('csv_url')
         csv_file_path = download_csv_from_url(csv_url)
         if csv_file_path:
-            create_table()  # Ensure the table is created or exists before uploading data
+            create_table()
             upload_csv_to_clickhouse(csv_file_path)
             delete_local_csv(csv_file_path)
             return jsonify({'message': 'CSV upload and processing completed.'}), 200

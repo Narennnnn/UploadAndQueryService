@@ -12,6 +12,7 @@ client = Client(
     verify=False
 )
 
+
 def build_query(filters, aggregates, aggregate_conditions):
     where_clauses = []
     for field, value in filters.items():
@@ -29,9 +30,7 @@ def build_query(filters, aggregates, aggregate_conditions):
         else:
             where_clauses.append(f"{field} LIKE '%{value}%'")
 
-    query = "SELECT * FROM segwise_game_data_table_dummy"
-    if where_clauses:
-        query += " WHERE " + " AND ".join(where_clauses)
+    query = ""
     if aggregates:
         aggregate_select = ", ".join(aggregates)
         query = f"SELECT {aggregate_select} FROM segwise_game_data_table_dummy"
@@ -39,7 +38,13 @@ def build_query(filters, aggregates, aggregate_conditions):
             query += " WHERE " + " AND ".join(where_clauses)
         if aggregate_conditions:
             query += " HAVING " + " AND ".join(aggregate_conditions)
+    else:
+        query = "SELECT * FROM segwise_game_data_table_dummy"
+        if where_clauses:
+            query += " WHERE " + " AND ".join(where_clauses)
+
     return query
+
 
 @query_bp.route('/query', methods=['GET'])
 @token_required
@@ -53,14 +58,24 @@ def query_data():
     end_date = filters.pop('end_date', None)
 
     # Adjust date format for ClickHouse if present
-    if start_date:
-        filters['Release_date'] = {'start_date': start_date}
-    if end_date:
-        filters['Release_date'] = {'end_date': end_date}
+    if start_date or end_date:
+        filters['Release_date'] = {}
+        if start_date:
+            filters['Release_date']['start_date'] = start_date
+        if end_date:
+            filters['Release_date']['end_date'] = end_date
+
+    # Handle aggregate queries
+    if aggregate_field and aggregate_type:
+        aggregates.append(f"{aggregate_type}({aggregate_field})")
 
     query = build_query(filters, aggregates, aggregate_conditions)
     try:
         result = client.execute(query)
-        return jsonify(result), 200
+        if aggregates:
+            return jsonify(result[0][0]), 200
+        else:
+            return jsonify(result), 200
     except Exception as e:
         return jsonify({'message': f"Query execution failed: {str(e)}"}), 500
+
