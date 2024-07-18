@@ -33,13 +33,13 @@ def build_query(filters, aggregates, aggregate_conditions):
     query = ""
     if aggregates:
         aggregate_select = ", ".join(aggregates)
-        query = f"SELECT {aggregate_select} FROM segwise_game_data_table_dummy"
+        query = f"SELECT {aggregate_select} FROM segwise_game_data_table"
         if where_clauses:
             query += " WHERE " + " AND ".join(where_clauses)
         if aggregate_conditions:
             query += " HAVING " + " AND ".join(aggregate_conditions)
     else:
-        query = "SELECT * FROM segwise_game_data_table_dummy"
+        query = "SELECT * FROM segwise_game_data_table"
         if where_clauses:
             query += " WHERE " + " AND ".join(where_clauses)
 

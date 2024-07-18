@@ -23,7 +23,7 @@ client = Client(
 )
 
 create_table_query = """
-CREATE TABLE IF NOT EXISTS segwise_game_data_table_dummy (
+CREATE TABLE IF NOT EXISTS segwise_game_data_table (
     s_no Int32,
     AppID Int32,
     Name String,
@@ -107,14 +107,14 @@ def upload_csv_to_clickhouse(csv_file_path):
 
                 if len(rows) >= 1000:
                     client.execute(
-                        'INSERT INTO segwise_game_data_table_dummy VALUES',
+                        'INSERT INTO segwise_game_data_table VALUES',
                         rows
                     )
                     rows = []
 
             if rows:
                 client.execute(
-                    'INSERT INTO segwise_game_data_table_dummy VALUES',
+                    'INSERT INTO segwise_game_data_table VALUES',
                     rows
                 )
 
