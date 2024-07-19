@@ -11,3 +11,4 @@ python-dateutil
 pytest
 pytest-flask
 requests_mock
+gunicorn

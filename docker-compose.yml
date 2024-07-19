@@ -9,4 +9,3 @@ services:
       - FLASK_ENV=development
     volumes:
       - .:/app
-    command: python main.py
