@@ -44,6 +44,8 @@ You can test the endpoints using Postman or any HTTP client:
         "message": "User registered successfully."
     } 
   ```
+![image](https://github.com/user-attachments/assets/04f09640-33ce-406c-93f4-987ade41d2ee)
+
 
 ## 2. Login
 #### Login using registered username and password
@@ -67,6 +69,7 @@ You can test the endpoints using Postman or any HTTP client:
       "token": "<generated_jwt_token>"
     }
   ```
+![image](https://github.com/user-attachments/assets/4d346b96-46fb-4b73-9ec4-7297511b2835)
 
 
 ## 3. Upload CSV
@@ -95,7 +98,9 @@ You can test the endpoints using Postman or any HTTP client:
   {
       "message": "CSV upload and processing completed."
   }
-  ````
+````
+![image](https://github.com/user-attachments/assets/aa7fb447-18a6-48c7-bd39-629a79ff3c43)
+
 
 ## 4. Get Numerical Fields
 
@@ -111,7 +116,9 @@ You can test the endpoints using Postman or any HTTP client:
     "Authorization": "Bearer <generated_jwt_token>"
   }
   ```
-  
+- **Response:**
+  ![image](https://github.com/user-attachments/assets/775e3aef-3448-4eee-b77a-9922dd7c8de1)
+
 
 ## 5. Query using Names
 
@@ -127,6 +134,8 @@ http://13.50.90.158:5000/query/query?Name=Tele
     "Authorization": "Bearer <generated_jwt_token>"
   }
   ```
+- **Response:**
+![image](https://github.com/user-attachments/assets/6bff507c-fbbb-4c41-8861-29511cc5692e)
 
   
 ## 6. Get by Release Date
@@ -144,6 +153,8 @@ http://13.50.90.158:5000/query/query?Release_date=2020-02-03
     "Authorization": "Bearer <generated_jwt_token>"
   }
   ```
+- **Response:**
+![image](https://github.com/user-attachments/assets/47b8cd0d-cbf4-40ec-9705-00682ad10cd7)
 
 
   
@@ -166,6 +177,8 @@ http://13.50.90.158:5000/query/query?aggregate_field=Price&aggregate_type=sum
     "Authorization": "Bearer <generated_jwt_token>"
   }
   ```
+- **Response:**
+![image](https://github.com/user-attachments/assets/63991df5-3d16-4ac3-bd49-b731aaea756c)
 
 ## 8. Date Range Search
 **Endpoint:**
@@ -180,6 +193,9 @@ http://13.50.90.158:5000/query/query?start_date=2020-02-03&end_date=2020-10-03
     "Authorization": "Bearer <generated_jwt_token>"
   }
   ```
+- **Response:**
+![image](https://github.com/user-attachments/assets/41c25450-8125-41b4-bbe6-3d10123f5ec2)
+
 
 
 ### Replace `<generated_jwt_token>` with the actual token obtained from the login endpoint response.
