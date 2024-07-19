@@ -69,7 +69,7 @@ You can test the endpoints using Postman or any HTTP client:
   ```
 
 
-## 2. Upload CSV
+## 3. Upload CSV
 
 **Endpoint:**
   ```bash
@@ -97,7 +97,7 @@ You can test the endpoints using Postman or any HTTP client:
   }
   ````
 
-## 3. Get Numerical Fields
+## 4. Get Numerical Fields
 
 **Endpoint:** 
   ```bash
@@ -113,7 +113,7 @@ You can test the endpoints using Postman or any HTTP client:
   ```
   
 
-## 4. Query using Names
+## 5. Query using Names
 
 **Endpoint:**
 ```bash
@@ -129,7 +129,7 @@ http://13.50.90.158:5000/query/query?Name=Tele
   ```
 
   
-## 5. Get by Release Date
+## 6. Get by Release Date
 
 **Endpoint:** 
 ```bash
@@ -147,7 +147,7 @@ http://13.50.90.158:5000/query/query?Release_date=2020-02-03
 
 
   
-## 6. Aggregate Search
+## 7. Aggregate Search
 ```bash
     aggregate_field : column name
     aggregate_type  : aggregate function name for e.g. count , sum , avg , min , max , etc
@@ -167,7 +167,7 @@ http://13.50.90.158:5000/query/query?aggregate_field=Price&aggregate_type=sum
   }
   ```
 
-## 7. Date Range Search
+## 8. Date Range Search
 **Endpoint:**
 ```bash
 http://13.50.90.158:5000/query/query?start_date=2020-02-03&end_date=2020-10-03
