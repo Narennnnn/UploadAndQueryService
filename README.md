@@ -1,8 +1,9 @@
 ﻿# UploadAndQueryService
 
-This repository contains a Flask application for handling CSV upload, querying data from ClickHouse, and authentication using JWT.
+This repository contains a Flask application for handling CSV upload, querying data from ClickHouse, and authentication using JWT.    
 
-
+Note: Temporarily Stopped EC2 instance and ClickHouse Cloud service to avoid any extra charges!)
+Hope, you'll find this project interesting ;)
 
 ## Setup
 
